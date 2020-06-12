@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const mc = require("mongodb").MongoClient
+const ObjectID = require('mongodb').ObjectID
 
 const mUrl = 'mongodb://localhost:27017'
 
@@ -100,10 +101,20 @@ app.get('/reply', (req, res) => {
     var songid = req.query.songid
     mc.connect(mUrl, (err, client) => {
         var db = client.db('genie')
-        db.collection('genie_reply').find({songid: songid}).sort('timestamp',-1)
+        db.collection('genie_reply').find({songid: songid}).sort('timestamp', -1)
             .toArray((err, docs) => {
                 res.json(docs)
                 client.close()
             })
+    })
+})
+
+app.get('/removeReply', (req, res) => {
+    var _id = req.query._id
+    var password = req.query.password
+    mc.connect(mUrl, (err, client) => {
+        var db = client.db('genie')
+        db.collection('genie_reply').remove({_id: new ObjectID(_id), password: password})
+        client.close()
     })
 })

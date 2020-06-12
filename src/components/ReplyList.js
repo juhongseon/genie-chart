@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {addReply, fetchReply} from "../actions/musicActions";
+import {addReply, fetchReply, removeReply} from "../actions/musicActions";
 import {useDispatch, useSelector} from "react-redux";
 
 export default function ReplyList() {
@@ -15,6 +15,8 @@ export default function ReplyList() {
         if(timer==0) dispatch(fetchReply(songid))
     },[songid,timer])
 
+    const [password,setPassword] = useState('')
+
     const data = useSelector(state=>state.musics.replys)
     const html = data.map(m=>
         <table className={'table'}>
@@ -27,8 +29,8 @@ export default function ReplyList() {
                     {m.content}
                 </td>
                 <td width={'20%'}>
-                    <input type={'password'} style={{"width":"80px"}} placeholder={'  password'}/>
-                    &nbsp;<input type={'button'} value={'삭제'}/>
+                    <input onChange={(e)=>{setPassword(e.target.value)}} type={'password'} style={{"width":"80px"}} placeholder={'  password'}/>
+                    &nbsp;<input onClick={(e)=>{dispatch(removeReply(e.target.dataset.id,password))}} data-id={m._id} type={'button'} value={'삭제'}/>
                 </td>
             </tr>
             </tbody>
