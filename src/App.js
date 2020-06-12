@@ -6,6 +6,8 @@ import {Provider} from 'react-redux'
 import store from "./store/store";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import Detail from "./components/Detail";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Header />
         <Switch>
           <Route exact path={'/'} component={Home}/>
+          <Route path={'/detail/:songid'} component={Detail}/>
+          <Route path={'/search'} component={Search}/>
         </Switch>
       </Router>
     </Provider>
