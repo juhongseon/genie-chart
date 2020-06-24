@@ -31,9 +31,9 @@ export default function Home_calendar() {
     
     return (
         <h1 className={'text-center'} style={{"margin":"50px auto"}}>
-            <span onClick={()=>{toYesterday()}}>{'<'}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span style={{'cursor':'pointer'}} onClick={()=>{toYesterday()}}>{'<'}&nbsp;&nbsp;&nbsp;&nbsp;</span>
             {year}년 {month}월 {date}일
-            <span onClick={()=>{toTomorrow()}}>&nbsp;&nbsp;&nbsp;&nbsp;{'>'}</span>
+            <span style={{'cursor':'pointer'}} onClick={()=>{toTomorrow()}}>&nbsp;&nbsp;&nbsp;&nbsp;{'>'}</span>
         </h1>
     )
 }
